@@ -1,5 +1,9 @@
 --port:5432 
 
+drop schema if exists inova cascade; 
+
+create schema inova;
+
 CREATE TABLE inova.Grupo (
                 id VARCHAR NOT NULL,
                 nome_projeto VARCHAR NOT NULL,
