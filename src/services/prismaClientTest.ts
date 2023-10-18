@@ -18,4 +18,3 @@ mainTest()
 })
 .finally(()=>{console.log("Teste Feito!")})
 
-const x = "Australia"
