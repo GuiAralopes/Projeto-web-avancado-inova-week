@@ -11,7 +11,7 @@ model aluno {
   id        String @id(map: "aluno_pk") @db.VarChar
   nome      String @db.VarChar(60)
   curso     String @db.VarChar
-  email     String @db.VarChar
+  email     String @db.VarChar 
   matricula String @unique(map: "aluno_idx") @db.VarChar(9)
 }
 
