@@ -17,3 +17,5 @@ mainTest()
     process.exit(1)
 })
 .finally(()=>{console.log("Teste Feito!")})
+
+const x = "Australia"
