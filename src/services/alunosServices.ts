@@ -11,14 +11,15 @@ const prisma = new PrismaClient();
         return lerAlunos
     }
 
-    async readAluno(matricula: string){
+    async readAluno(id: string){
         const lerAluno = await prisma.aluno.findUnique(
             {
                 where: {
-                    matricula,
+                    id: id
                 },
             })
         console.log(lerAluno);
+        return lerAluno;
     }
 
     async createAluno(data:{id: string, nome: string, curso: string, email: string, matricula: string}){
@@ -55,8 +56,3 @@ const prisma = new PrismaClient();
 }
 
 export default new alunosServices();
-
-
-
-
-

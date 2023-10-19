@@ -6,15 +6,17 @@ class alunosServices {
     constructor() { }
     async readAllAlunos() {
         const lerAlunos = await prisma.aluno.findMany();
-        console.log(lerAlunos);
+        // console.log(lerAlunos);
+        return lerAlunos;
     }
-    async readAluno(matricula) {
+    async readAluno(id) {
         const lerAluno = await prisma.aluno.findUnique({
             where: {
-                matricula,
+                id: id
             },
         });
         console.log(lerAluno);
+        return lerAluno;
     }
     async createAluno(data) {
         const criaAluno = await prisma.aluno.create({

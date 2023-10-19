@@ -20,14 +20,11 @@ class alunosControllers{
     }
 
     async buscaAluno(req: Request, res: Response){
-        try{
-            const matricula = req.params.matricula;
-            const alunoBuscado = await alunosServices.readAluno(matricula)
+        const id = req.params.id
+        try{            
+            const alunoBuscado = await alunosServices.readAluno(id)
             return res.status(200).json(
-                {
-                    status: 'ok',
-                    alunoBuscado,
-                }
+                    {aluno:alunoBuscado}
             )
         } catch (error){
             res.status(500).json(error)
