@@ -2,12 +2,13 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
- class alunoServices{
+ class alunosServices{
     constructor(){}
 
     async readAllAlunos(){
         const lerAlunos = await prisma.aluno.findMany();
-        console.log(lerAlunos);
+        // console.log(lerAlunos);
+        return lerAlunos
     }
 
     async readAluno(matricula: string){
@@ -53,7 +54,7 @@ const prisma = new PrismaClient();
     }
 }
 
-export default new alunoServices();
+export default new alunosServices();
 
 
 
