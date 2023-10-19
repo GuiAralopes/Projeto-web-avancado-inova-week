@@ -22,7 +22,7 @@ const prisma = new PrismaClient();
         return lerAluno;
     }
 
-    async createAluno(data:{id: string, nome: string, curso: string, email: string, matricula: string}){
+    public async createAluno(data:{id: string, nome: string, curso: string, email: string, matricula: string}){
         const criaAluno = await prisma.aluno.create(
             {
                 data,

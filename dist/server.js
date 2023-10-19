@@ -8,7 +8,7 @@ const alunosRouter_1 = __importDefault(require("./routes/alunosRouter"));
 const app = (0, express_1.default)();
 // const route = Router()
 const port = 3000;
-// app.use(express.json());
+app.use(express_1.default.json());
 app.use("/api", alunosRouter_1.default);
-// app.use(express.static('public'));
+app.use(express_1.default.static('public'));
 app.listen(port, () => { console.log(`Server running on http://localhost:${port}/api`); });

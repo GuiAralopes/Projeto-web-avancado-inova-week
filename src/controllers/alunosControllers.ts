@@ -31,11 +31,12 @@ class alunosControllers{
         }
     }
 
-    async criarAluno(req: Request, res: Response){
+    public async criarAluno(req: Request, res: Response){
+        const {id, nome, curso, email, matricula} = req.body
         try{
-            const {id, nome, curso, email, matricula} = req.body;
+            
             const criaAluno = await alunosServices.createAluno({id, nome, curso, email, matricula})
-            return res.status(200).json(
+            return res.status(201).json(
                 {
                     status: 'ok',
                     criaAluno,
@@ -47,8 +48,9 @@ class alunosControllers{
     }
 
     async atualizarAluno(req: Request, res: Response){
+        const id = req.params.id
         try{
-            const id = req.params.id
+            
             const {nome, curso, email, matricula} = req.body;
             const atualizaAluno = await alunosServices.updateAluno(id, {nome, curso, email, matricula})
             return res.status(200).json(

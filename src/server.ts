@@ -6,11 +6,11 @@ const app = express()
 // const route = Router()
 const port = 3000
 
-// app.use(express.json());
+app.use(express.json());
 
 app.use("/api", alunoRouter)
 
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.listen(port, ()=>{console.log(`Server running on http://localhost:${port}/api`)})
 
