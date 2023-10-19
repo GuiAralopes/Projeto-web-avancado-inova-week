@@ -49,9 +49,8 @@ class alunosControllers{
 
     async atualizarAluno(req: Request, res: Response){
         const id = req.params.id
-        try{
-            
-            const {nome, curso, email, matricula} = req.body;
+        const {nome, curso, email, matricula} = req.body;
+        try{                        
             const atualizaAluno = await alunosServices.updateAluno(id, {nome, curso, email, matricula})
             return res.status(200).json(
                 {
