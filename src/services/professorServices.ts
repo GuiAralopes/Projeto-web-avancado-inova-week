@@ -6,22 +6,23 @@ export class ProfessorServices {
   constructor() {}
 
   async readAllProfessor() {
-    const lerProf = await prisma.professor.findMany();
+    const lerProfs = await prisma.professor.findMany();
     // console.log(lerProf);
-    return lerProf
+    return lerProfs
   }
 
-  async readProfessor(matricula: string) {
+  async readProfessor(id: number) {
     const lerProf = await prisma.professor.findUnique({
       where: {
-        matricula,
+          id: id
       },
-    });
-    // console.log(lerProf);
+    })
+     console.log(lerProf);
+     return lerProf;
   }
 
   async createProf(data: {
-    id: string;
+    id: number;
     nome: string;
     email: string;
     matricula: string;
@@ -33,7 +34,7 @@ export class ProfessorServices {
   }
 
   async updateProf(
-    id: string,
+    id: number,
     data: { nome: string; email: string; matricula: string }
   ) {
     const atualizaProf = await prisma.professor.update({
@@ -45,10 +46,10 @@ export class ProfessorServices {
     return atualizaProf;
   }
 
-  async deleteProf(matricula: string) {
+  async deleteProf(id: number) {
     const deletaProf = await prisma.professor.delete({
       where: {
-        matricula,
+        id,
       },
     });
     return deletaProf;

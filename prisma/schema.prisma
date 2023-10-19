@@ -8,37 +8,31 @@ datasource db {
 }
 
 model aluno {
-  id        String @id(map: "aluno_pk") @db.VarChar
+  id        Int    @id(map: "aluno_pk")
   nome      String @db.VarChar(60)
   curso     String @db.VarChar
-  email     String @db.VarChar 
+  email     String @db.VarChar
   matricula String @unique(map: "aluno_idx") @db.VarChar(9)
+  grupo_id  Int
+  grupo     grupo  @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_aluno_fk")
 }
 
 model avaliacao {
-  id             String    @id(map: "avaliacao_pk") @db.VarChar
+  id             Int       @id(map: "avaliacao_pk")
   nota_avaliacao Float     @db.Real
-  professor_id   String    @db.VarChar
+  professor_id   Int
   professor      professor @relation(fields: [professor_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "professor_avaliacao_fk")
-  projeto        projeto[]
 }
 
 model grupo {
-  id                String              @id(map: "grupo_pk") @db.VarChar
-  nome_projeto      String              @db.VarChar
-  integrantes_grupo integrantes_grupo[]
-  projeto           projeto[]
-}
-
-model integrantes_grupo {
-  id       String @id(map: "integrantes_grupo_pk") @db.VarChar
-  aluno_id String @db.VarChar
-  grupo_id String @db.VarChar
-  grupo    grupo  @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_integrantes_grupo_fk")
+  id           Int       @id(map: "grupo_pk")
+  nome_projeto String    @db.VarChar
+  aluno        aluno[]
+  projeto      projeto[]
 }
 
 model professor {
-  id        String      @id(map: "professor_pk") @db.VarChar
+  id        Int         @id(map: "professor_pk")
   nome      String      @db.VarChar(60)
   matricula String      @unique(map: "professor_idx") @db.VarChar
   email     String      @db.VarChar
@@ -46,12 +40,11 @@ model professor {
 }
 
 model projeto {
-  id                String    @id(map: "projeto_pk") @db.VarChar
-  tema              String    @db.VarChar
+  id                Int      @id(map: "projeto_pk")
+  tema              String   @db.VarChar
   estande           Int
-  grupo_id          String    @db.VarChar
-  data_apresentacao DateTime  @db.Date
-  avaliacao_id      String    @db.VarChar
-  avaliacao         avaliacao @relation(fields: [avaliacao_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "avaliacao_projeto_fk")
-  grupo             grupo     @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_projeto_fk")
+  grupo_id          Int
+  data_apresentacao DateTime @db.Date
+  avaliacao_id      Int
+  grupo             grupo    @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_projeto_fk")
 }
