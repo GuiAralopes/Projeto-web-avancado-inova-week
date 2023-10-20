@@ -1,3 +1,22 @@
+DROP DATABASE IF EXISTS inovaweek;
+
+-- Criação da role para admistração do banco de dados.
+CREATE ROLE "tester" WITH
+	CREATEDB
+	INHERIT
+	PASSWORD 'pgdb123';
+
+--criação do banco de dados e decidir seu proprietário
+--codificação UTF-8
+CREATE DATABASE inovaweek
+    WITH 
+    OWNER = "tester"
+    TEMPLATE = template0
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'en_US.UTF-8'
+    LC_CTYPE = 'en_US.UTF-8'
+    CONNECTION LIMIT = -1;
+
 DROP schema IF EXISTS inova CASCADE;
 
 CREATE schema IF NOT EXISTS inova;
