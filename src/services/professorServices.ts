@@ -57,3 +57,5 @@ export class ProfessorServices {
 }
 
 export default new ProfessorServices();
+//  const blyat = new ProfessorServices();
+//  blyat.readProfessor(1)

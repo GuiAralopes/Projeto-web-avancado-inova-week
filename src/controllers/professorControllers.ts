@@ -19,7 +19,7 @@ class professorControllers {
   async buscaProfessor(req: Request, res: Response) {
     const id = parseInt(req.params.id);
     try {
-      const professorBuscado = await professorServices.readProfessor(1);
+      const professorBuscado = await professorServices.readProfessor(2);
       return res.status(200).json({ professor: professorBuscado });
     } catch (error) {
       res.status(500).json(error);

@@ -56,7 +56,7 @@ CREATE UNIQUE INDEX "aluno_idx" ON "aluno"("matricula");
 CREATE UNIQUE INDEX "professor_idx" ON "professor"("matricula");
 
 -- AddForeignKey
-ALTER TABLE "aluno" ADD CONSTRAINT "grupo_aluno_fk" FOREIGN KEY ("grupo_id") REFERENCES "grupo"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE "aluno" ADD CONSTRAINT "grupo_aluno_fk" FOREIGN KEY ("grupo_id") REFERENCES "grupo"("id") ON DELETE NO ACTION ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "avaliacao" ADD CONSTRAINT "professor_avaliacao_fk" FOREIGN KEY ("professor_id") REFERENCES "professor"("id") ON DELETE NO ACTION ON UPDATE NO ACTION;

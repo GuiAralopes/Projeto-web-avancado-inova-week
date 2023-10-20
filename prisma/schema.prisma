@@ -14,7 +14,7 @@ model aluno {
   email     String @db.VarChar
   matricula String @unique(map: "aluno_idx") @db.VarChar(9)
   grupo_id  Int
-  grupo     grupo  @relation(fields: [grupo_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "grupo_aluno_fk")
+  grupo     grupo  @relation(fields: [grupo_id], references: [id], onDelete: NoAction, map: "grupo_aluno_fk")
 }
 
 model avaliacao {

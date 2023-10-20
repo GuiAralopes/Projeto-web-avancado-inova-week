@@ -12,7 +12,7 @@ class alunosServices {
     async readAluno(id) {
         const lerAluno = await prisma.aluno.findUnique({
             where: {
-                id: id
+                id: id,
             },
         });
         console.log(lerAluno);
@@ -31,15 +31,24 @@ class alunosServices {
             },
             data,
         });
+        console.log(atualizaAluno);
         return atualizaAluno;
     }
-    async deleteAlunos(matricula) {
+    async deleteAlunos(id) {
         const deletaAluno = await prisma.aluno.delete({
             where: {
-                matricula,
+                id,
             },
         });
         return deletaAluno;
     }
 }
 exports.default = new alunosServices();
+// const update = new alunosServices();
+// update.updateAluno(4, {
+//   nome: "Messi da Silva Cardamomo",
+//   curso: "Voodoo",
+//   email: "carameloychocolate@gmail.com",
+//   matricula: "999999999",
+//   grupo_id: 1,
+// });

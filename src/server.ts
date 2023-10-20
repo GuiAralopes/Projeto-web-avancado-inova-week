@@ -9,7 +9,7 @@ const port = 3000
 
 app.use(express.json());
 
-// app.use("/api", alunoRouter)
+app.use("/api", alunoRouter)
 app.use("/api", professorRouter)
 
 app.use(express.static('public'));

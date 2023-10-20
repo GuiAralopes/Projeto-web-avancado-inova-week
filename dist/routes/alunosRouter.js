@@ -9,4 +9,6 @@ const alunoRouter = (0, express_1.Router)();
 alunoRouter.get("/alunos", alunosControllers_1.default.listarAlunos);
 alunoRouter.get("/aluno/:id", alunosControllers_1.default.buscaAluno);
 alunoRouter.post("/aluno/post", alunosControllers_1.default.criarAluno);
+alunoRouter.delete("aluno/delete/:id", alunosControllers_1.default.deletaAluno);
+alunoRouter.put("aluno/update/:id", alunosControllers_1.default.atualizarAluno);
 exports.default = alunoRouter;

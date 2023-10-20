@@ -19,7 +19,7 @@ class alunosControllers {
         }
     }
     async buscaAluno(req, res) {
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
         try {
             const alunoBuscado = await alunosServices_1.default.readAluno(id);
             return res.status(200).json({ aluno: alunoBuscado });
@@ -29,9 +29,9 @@ class alunosControllers {
         }
     }
     async criarAluno(req, res) {
-        const { id, nome, curso, email, matricula } = req.body;
+        const { id, nome, curso, email, matricula, grupo_id } = req.body;
         try {
-            const criaAluno = await alunosServices_1.default.createAluno({ id, nome, curso, email, matricula });
+            const criaAluno = await alunosServices_1.default.createAluno({ id, nome, curso, email, matricula, grupo_id });
             return res.status(201).json({
                 status: 'ok',
                 criaAluno,
@@ -42,23 +42,20 @@ class alunosControllers {
         }
     }
     async atualizarAluno(req, res) {
-        const id = req.params.id;
+        const id = parseInt(req.params.id);
+        const { nome, curso, email, matricula, grupo_id } = req.body;
         try {
-            const { nome, curso, email, matricula } = req.body;
-            const atualizaAluno = await alunosServices_1.default.updateAluno(id, { nome, curso, email, matricula });
-            return res.status(200).json({
-                status: 'ok',
-                atualizaAluno,
-                message: 'Aluno atualizado com sucesso!!'
-            });
+            const atualizaAluno = await alunosServices_1.default.updateAluno(id, { nome, curso, email, matricula, grupo_id });
+            return res.json(atualizaAluno);
         }
         catch (error) {
+            console.log(error);
             res.status(500).json(error);
         }
     }
     async deletaAluno(req, res) {
         try {
-            const id = req.params.id;
+            const id = parseInt(req.params.id);
             const alunoDeletado = await alunosServices_1.default.deleteAlunos(id);
             return res.status(200).json({
                 status: 'ok',
