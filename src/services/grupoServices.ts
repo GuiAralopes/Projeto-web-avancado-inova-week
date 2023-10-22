@@ -10,7 +10,7 @@ const prisma = new PrismaClient();
         return lerGrupo
     }
 
-    async readGrupo(id: string){
+    async readGrupo(id: number){
         const lerGrupo = await prisma.grupo.findUnique(
             {
                 where: {
@@ -21,7 +21,7 @@ const prisma = new PrismaClient();
         return lerGrupo;
     }
 
-    async createGrupo(data:{id: string, nome_projeto: string}){
+    async createGrupo(data:{id: number, nome_projeto: string}){
         const criaGrupo = await prisma.grupo.create(
             {
                 data,
@@ -30,7 +30,7 @@ const prisma = new PrismaClient();
         return criaGrupo;
     }
 
-    async updateGrupo(id: string, data:{nome_projeto: string}){
+    async updateGrupo(id: number, data:{nome_projeto: string}){
         const atualizaGrupo = await prisma.grupo.update(
             {
                 where:{
@@ -42,7 +42,7 @@ const prisma = new PrismaClient();
         return atualizaGrupo;
     }
 
-    async deleteGrupo(id: string){
+    async deleteGrupo(id: number){
         const deletaGrupo = await prisma.grupo.delete(
         {
             where:{

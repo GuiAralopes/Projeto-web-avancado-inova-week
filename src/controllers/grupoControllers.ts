@@ -20,7 +20,7 @@ class grupoControllers{
     }
 
     async buscaGrupo(req: Request, res: Response){
-        const id = req.params.id
+        const id = parseInt(req.params.id)
         try{            
             const grupoBuscado = await grupoServices.readGrupo(id)
             return res.status(200).json(
@@ -47,9 +47,10 @@ class grupoControllers{
     }
 
     async atualizarGrupo(req: Request, res: Response){
-        try{
-            const id = req.params.id
+        const id = parseInt(req.params.id)
             const {nome_projeto} = req.body;
+        try{
+            
             const atualizaGrupo = await grupoServices.updateGrupo(id, {nome_projeto})
             return res.status(200).json(
                 {
@@ -65,8 +66,8 @@ class grupoControllers{
     }
 
     async deletaGrupo(req: Request, res: Response){
+        const id = parseInt(req.params.id)
         try{
-            const id = req.params.id
             const grupoDeletado = await grupoServices.deleteGrupo(id)
             return res.status(200).json(
                 {

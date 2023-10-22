@@ -4,6 +4,7 @@ import alunoRouter from './routes/alunosRouter'
 import professorRouter from './routes/professorRouter'
 import projetoRouter from './routes/projetoRouter'
 import avaliacaoRouter from './routes/avaliacaoRouter'
+import grupoRouter from './routes/grupoRouter'
 
 const app = express()
 // const route = Router()
@@ -15,6 +16,7 @@ app.use("/api", alunoRouter)
 app.use("/api", professorRouter)
 app.use("/api", projetoRouter)
 app.use("/api", avaliacaoRouter)
+app.use("/api", grupoRouter)
 
 app.use(express.static('public'));
 
