@@ -3,6 +3,7 @@ import {Router, Response, Request} from 'express'
 import alunoRouter from './routes/alunosRouter'
 import professorRouter from './routes/professorRouter'
 import projetoRouter from './routes/projetoRouter'
+import avaliacaoRouter from './routes/avaliacaoRouter'
 
 const app = express()
 // const route = Router()
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use("/api", alunoRouter)
 app.use("/api", professorRouter)
 app.use("/api", projetoRouter)
+app.use("/api", avaliacaoRouter)
 
 app.use(express.static('public'));
 
