@@ -1,18 +1,35 @@
---port:5432 
+DROP DATABASE IF EXISTS inovaweek;
 
-drop schema if exists inova cascade; 
+-- Criação da role para admistração do banco de dados.
+CREATE ROLE "tester" WITH
+	CREATEDB
+	INHERIT
+	PASSWORD 'pgdb123';
 
-create schema inova;
+--criação do banco de dados e decidir seu proprietário
+--codificação UTF-8
+CREATE DATABASE inovaweek
+    WITH 
+    OWNER = "tester"
+    TEMPLATE = template0
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'en_US.UTF-8'
+    LC_CTYPE = 'en_US.UTF-8'
+    CONNECTION LIMIT = -1;
+
+DROP schema IF EXISTS inova CASCADE;
+
+CREATE schema IF NOT EXISTS inova;
 
 CREATE TABLE inova.Grupo (
-                id VARCHAR NOT NULL,
+                id INTEGER NOT NULL,
                 nome_projeto VARCHAR NOT NULL,
                 CONSTRAINT grupo_pk PRIMARY KEY (id)
 );
 
 
 CREATE TABLE inova.Professor (
-                id VARCHAR NOT NULL,
+                id INTEGER NOT NULL,
                 nome VARCHAR(60) NOT NULL,
                 matricula VARCHAR NOT NULL,
                 email VARCHAR NOT NULL,
@@ -25,30 +42,31 @@ CREATE UNIQUE INDEX professor_idx
  ( matricula );
 
 CREATE TABLE inova.Avaliacao (
-                id VARCHAR NOT NULL,
+                id INTEGER NOT NULL,
                 nota_avaliacao REAL NOT NULL,
-                professor_id VARCHAR NOT NULL,
+                professor_id INTEGER NOT NULL,
                 CONSTRAINT avaliacao_pk PRIMARY KEY (id)
 );
 
 
 CREATE TABLE inova.Projeto (
-                id VARCHAR NOT NULL,
+                id INTEGER NOT NULL,
                 tema VARCHAR NOT NULL,
                 estande INTEGER NOT NULL,
-                grupo_id VARCHAR NOT NULL,
+                grupo_id INTEGER NOT NULL,
                 data_apresentacao DATE NOT NULL,
-                avaliacao_id VARCHAR NOT NULL,
+                avaliacao_id INTEGER NOT NULL,
                 CONSTRAINT projeto_pk PRIMARY KEY (id)
 );
 
 
 CREATE TABLE inova.Aluno (
-                id VARCHAR NOT NULL,
+                id INTEGER NOT NULL,
                 nome VARCHAR(60) NOT NULL,
                 curso VARCHAR NOT NULL,
                 email VARCHAR NOT NULL,
                 matricula VARCHAR(9) NOT NULL,
+                grupo_id INTEGER NOT NULL,
                 CONSTRAINT aluno_pk PRIMARY KEY (id)
 );
 
@@ -57,22 +75,14 @@ CREATE UNIQUE INDEX aluno_idx
  ON inova.Aluno
  ( matricula );
 
-CREATE TABLE inova.Integrantes_grupo (
-                id VARCHAR NOT NULL,
-                aluno_id VARCHAR NOT NULL,
-                grupo_id VARCHAR NOT NULL,
-                CONSTRAINT integrantes_grupo_pk PRIMARY KEY (id)
-);
-
-
-ALTER TABLE inova.Integrantes_grupo ADD CONSTRAINT grupo_integrantes_grupo_fk
+ALTER TABLE inova.Projeto ADD CONSTRAINT grupo_projeto_fk
 FOREIGN KEY (grupo_id)
 REFERENCES inova.Grupo (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE inova.Projeto ADD CONSTRAINT grupo_projeto_fk
+ALTER TABLE inova.Aluno ADD CONSTRAINT grupo_aluno_fk
 FOREIGN KEY (grupo_id)
 REFERENCES inova.Grupo (id)
 ON DELETE NO ACTION
@@ -89,13 +99,6 @@ NOT DEFERRABLE;
 ALTER TABLE inova.Projeto ADD CONSTRAINT avaliacao_projeto_fk
 FOREIGN KEY (avaliacao_id)
 REFERENCES inova.Avaliacao (id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
-ALTER TABLE inova.Integrantes_grupo ADD CONSTRAINT aluno_integrantes_grupo_fk
-FOREIGN KEY (aluno_id)
-REFERENCES inova.Aluno (id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
